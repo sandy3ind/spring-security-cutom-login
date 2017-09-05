@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 
@@ -15,52 +16,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HelloController {
 	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String  showLogin() {		
+	public String  login(@RequestParam(value = "error", required = false) String error,
+			Model model) {
+		if (error != null) {
+			model.addAttribute("error", "Invalid username and password!");
+		}
 		return "login";
 	}
 
-	/**
-	 * Show User page
-	 * 
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "user", method = RequestMethod.GET)
+	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public String  userPage(Model model) {
 		// Set attribute on model
-		model.addAttribute("title", "Spring Security Hello World");
-		model.addAttribute("message", "This is not protected page - User Page!");
+		model.addAttribute("title", "Spring Security Home page");
+		model.addAttribute("message", "This is protected page!");
 		// Return view name
-		return "user";
-	}
-	
-	/**
-	 * Show DBA page
-	 * 
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "dba", method = RequestMethod.GET)
-	public String  dbPage(Model model) {
-		// Set attribute on model
-		model.addAttribute("title", "Spring Security Hello World");
-		model.addAttribute("message", "This is protected page - DBA Page!");
-		// Return view name
-		return "dba";
-	}
-	
-	/**
-	 * Show Admin page
-	 * 
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "admin", method = RequestMethod.GET)
-	public String  adminPage(Model model) {
-		// Set attribute on model
-		model.addAttribute("title", "Spring Security Hello World");
-		model.addAttribute("message", "This is protected page - Admin Page!");
-		// Return view name
-		return "admin";
+		return "home";
 	}
 }

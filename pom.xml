@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.javalogin</groupId>
-	<artifactId>spring-security-custom-login</artifactId>
+	<artifactId>spring-security-custom-login-form</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-security-custom-login Maven Webapp</name>
+	<name>spring-security-custom-login-form Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -90,6 +90,6 @@
 	            </configuration>
 	        </plugin>
 	    </plugins>
-		<finalName>spring-security-custom-login</finalName>
+		<finalName>spring-security-custom-login-form</finalName>
 	</build>
 </project>

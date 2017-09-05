@@ -23,25 +23,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("user").password("123456").roles("USER");
-		auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
-		auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");
+		auth.inMemoryAuthentication().withUser("sandeep").password("123456").roles("USER");
 	}
 	/**
-	 * If using spring 4 then logout GET request doesn't work becuase of csrf it uses POST request.
-	 * Disabling csrf will use GET
+	 * If using spring 4+ then CSRF enabled by default and logout uses POST method
+	 * Disabling CSRF will use GET method for logout
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 	  http.csrf().disable()
-	  	.authorizeRequests()	  		
-			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-			.antMatchers("/dba/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_DBA')")
-			.antMatchers("/**").authenticated()
+	  	.authorizeRequests()
+			.anyRequest().authenticated()
 			.and()
 		.formLogin()
 			.loginPage("/login").permitAll()
+		    .defaultSuccessUrl("/home")
+		    .failureUrl("/login?error")
 			.and()
-		.logout();
+		.logout()
+			.logoutSuccessUrl("/login?logout");
 	}
 }
